@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="colors">
+        <item>Black</item>
+        <item>White</item>
+        <item>Red</item>
+        <item>Blue</item>
+    </string-array>
+    <string-array name="payment_methods">
+        <item>Thanh toán khi nhận hàng</item>
+        <item>Thẻ ngân hàng</item>
+        <item>Momo</item>
+        <item>ZaloPay</item>
+    </string-array>
+</resources>
