@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -12,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private EditText searchEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +30,14 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Jordan Air 1 buttons
-        Button btnDetailJordan = findViewById(R.id.btndetail_jordan);
-        btnDetailJordan.setOnClickListener(v -> openDetail("Jordan Air 1", "5.000.000₫", R.drawable.jordan_air1));
+        // Initialize search view
+        searchEditText = findViewById(R.id.search_bar).findViewById(android.R.id.edit); // Lấy EditText bên trong CardView
+        searchEditText.setOnEditorActionListener((v, actionId, event) -> {
+            performSearch();
+            return true;
+        });
 
+        // Sản phẩm nổi bật: Jordan Air 1
         Button btnBuyJordan = findViewById(R.id.btnbuy_jordan);
         btnBuyJordan.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -39,10 +47,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Adidas Samba buttons
-        Button btnDetailSamba = findViewById(R.id.btndetail_samba);
-        btnDetailSamba.setOnClickListener(v -> openDetail("Adidas Samba", "2.500.000₫", R.drawable.adidas_samba));
+        Button btnDetailJordan = findViewById(R.id.btndetail_jordan);
+        btnDetailJordan.setOnClickListener(v -> openDetail("Jordan Air 1", "5.000.000₫", R.drawable.jordan_air1));
 
+        // Sản phẩm nổi bật: Adidas Samba
         Button btnBuySamba = findViewById(R.id.btnbuy_samba);
         btnBuySamba.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -52,10 +60,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Nike Air Force 1 buttons
-        Button btnDetailNikeAirForce = findViewById(R.id.btndetail_nike_air_force);
-        btnDetailNikeAirForce.setOnClickListener(v -> openDetail("Nike Air Force 1", "3.800.000₫", R.drawable.nike_air_force1));
+        Button btnDetailSamba = findViewById(R.id.btndetail_samba);
+        btnDetailSamba.setOnClickListener(v -> openDetail("Adidas Samba", "2.500.000₫", R.drawable.adidas_samba));
 
+        // Sản phẩm nổi bật: Nike Air Force 1
         Button btnBuyNikeAirForce = findViewById(R.id.btnbuy_nike_air_force);
         btnBuyNikeAirForce.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -65,10 +73,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Nike Air Jordan 1 Retro buttons
-        Button btnDetailJordanRetro = findViewById(R.id.btndetail_jordan_retro);
-        btnDetailJordanRetro.setOnClickListener(v -> openDetail("Nike Air Jordan 1 Retro", "4.200.000₫", R.drawable.nike_air_jordan));
+        Button btnDetailNikeAirForce = findViewById(R.id.btndetail_nike_air_force);
+        btnDetailNikeAirForce.setOnClickListener(v -> openDetail("Nike Air Force 1", "3.800.000₫", R.drawable.nike_air_force1));
 
+        // Sản phẩm nổi bật: Nike Air Jordan 1 Retro
         Button btnBuyJordanRetro = findViewById(R.id.btnbuy_jordan_retro);
         btnBuyJordanRetro.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -78,10 +86,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Adidas Campus buttons
-        Button btnDetailCampus = findViewById(R.id.btndetail_campus);
-        btnDetailCampus.setOnClickListener(v -> openDetail("Adidas Campus", "3.833.000₫", R.drawable.adidas_samba));
+        Button btnDetailJordanRetro = findViewById(R.id.btndetail_jordan_retro);
+        btnDetailJordanRetro.setOnClickListener(v -> openDetail("Nike Air Jordan 1 Retro", "4.200.000₫", R.drawable.nike_air_jordan));
 
+        // Sản phẩm nổi bật: Adidas Campus
         Button btnBuyCampus = findViewById(R.id.btnbuy_campus);
         btnBuyCampus.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -91,10 +99,10 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Nike Blazer Mid buttons
-        Button btnDetailBlazer = findViewById(R.id.btndetail_blazer);
-        btnDetailBlazer.setOnClickListener(v -> openDetail("Nike Blazer Mid", "3.050.000₫", R.drawable.nike_blazer_mid));
+        Button btnDetailCampus = findViewById(R.id.btndetail_campus);
+        btnDetailCampus.setOnClickListener(v -> openDetail("Adidas Campus", "3.833.000₫", R.drawable.adidas_samba));
 
+        // Sản phẩm nổi bật: Nike Blazer Mid
         Button btnBuyBlazer = findViewById(R.id.btnbuy_blazer);
         btnBuyBlazer.setOnClickListener(v -> {
             Intent it = new Intent(getApplicationContext(), BuyProduct.class);
@@ -104,10 +112,29 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(it);
         });
 
-        // Cart navigation button
+        Button btnDetailBlazer = findViewById(R.id.btndetail_blazer);
+        btnDetailBlazer.setOnClickListener(v -> openDetail("Nike Blazer Mid", "3.050.000₫", R.drawable.nike_blazer_mid));
+
+        // Thanh điều hướng dưới
         ImageView navCart = findViewById(R.id.nav_cart);
         navCart.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+            startActivity(intent);
+        });
+
+        // Các nút khác trong bottom_nav (giả định hành động tạm thời)
+        ImageView navHome = findViewById(R.id.nav_home);
+        navHome.setOnClickListener(v -> Toast.makeText(this, "Trang chủ", Toast.LENGTH_SHORT).show());
+
+        ImageView navBrands = findViewById(R.id.nav_brands);
+        navBrands.setOnClickListener(v -> Toast.makeText(this, "Nhãn hiệu", Toast.LENGTH_SHORT).show());
+
+        ImageView navHistory = findViewById(R.id.nav_history);
+        navHistory.setOnClickListener(v -> Toast.makeText(this, "Lịch sử", Toast.LENGTH_SHORT).show());
+
+        ImageView navAccount = findViewById(R.id.nav_account);
+        navAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, AccountActivity.class); // Điều hướng đến AccountActivity
             startActivity(intent);
         });
     }
@@ -118,5 +145,36 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("price", price);
         intent.putExtra("image", imageResId);
         startActivity(intent);
+    }
+
+    private void performSearch() {
+        String query = searchEditText.getText().toString().trim().toLowerCase();
+        if (query.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập từ khóa tìm kiếm!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Danh sách sản phẩm cố định dựa trên các CardView
+        String[][] products = {
+                {"Jordan Air 1", "5.000.000₫", String.valueOf(R.drawable.jordan_air1)},
+                {"Adidas Samba", "2.500.000₫", String.valueOf(R.drawable.adidas_samba)},
+                {"Nike Air Force 1", "3.800.000₫", String.valueOf(R.drawable.nike_air_force1)},
+                {"Nike Air Jordan 1 Retro", "4.200.000₫", String.valueOf(R.drawable.nike_air_jordan)},
+                {"Adidas Campus", "3.833.000₫", String.valueOf(R.drawable.adidas_samba)},
+                {"Nike Blazer Mid", "3.050.000₫", String.valueOf(R.drawable.nike_blazer_mid)}
+        };
+
+        boolean found = false;
+        for (String[] product : products) {
+            if (product[0].toLowerCase().contains(query)) {
+                openDetail(product[0], product[1], Integer.parseInt(product[2]));
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            Toast.makeText(this, "Không tìm thấy sản phẩm!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

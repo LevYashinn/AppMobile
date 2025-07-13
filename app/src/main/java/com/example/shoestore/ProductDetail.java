@@ -6,10 +6,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class ProductDetail extends AppCompatActivity {
 
@@ -32,9 +34,11 @@ public class ProductDetail extends AppCompatActivity {
         RatingBar productRating = findViewById(R.id.productRating);
         TextView productSpecs = findViewById(R.id.productSpecs);
         TextView productDescription = findViewById(R.id.productDescription);
-        Button btnAddToCart = findViewById(R.id.btnAddToCart);
         Button btnBuyNow = findViewById(R.id.btnBuyNow);
         Button btnBack = findViewById(R.id.btnBack);
+        TextInputEditText txtReview = findViewById(R.id.txtReview);
+        Button btnSubmitReview = findViewById(R.id.btnSubmitReview);
+        TextView reviewDisplay = findViewById(R.id.reviewDisplay);
 
         // Get data from intent
         Intent intent = getIntent();
@@ -81,11 +85,6 @@ public class ProductDetail extends AppCompatActivity {
         }
 
         // Button click listeners
-        btnAddToCart.setOnClickListener(v -> {
-            // TODO: Implement add to cart functionality
-            // Example: Add product to a cart database or list
-        });
-
         btnBuyNow.setOnClickListener(v -> {
             Intent buyIntent = new Intent(ProductDetail.this, BuyProduct.class);
             buyIntent.putExtra("name", name);
@@ -95,5 +94,19 @@ public class ProductDetail extends AppCompatActivity {
         });
 
         btnBack.setOnClickListener(v -> finish());
+
+        // Submit review functionality
+        btnSubmitReview.setOnClickListener(v -> {
+            String reviewText = txtReview.getText().toString().trim();
+            if (!reviewText.isEmpty()) {
+                String currentReviews = reviewDisplay.getText().toString();
+                int reviewCount = currentReviews.split("\n").length + 1;
+                reviewDisplay.setText(currentReviews + "\n" + reviewCount + ". Người dùng: " + reviewText + " (4.5 sao)");
+                txtReview.setText(""); // Clear input after submission
+                Toast.makeText(this, "Đánh giá đã được gửi!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Vui lòng nhập đánh giá!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

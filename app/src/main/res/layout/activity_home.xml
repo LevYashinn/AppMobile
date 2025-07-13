@@ -24,12 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:drawableStart="@android:drawable/ic_menu_search"
             android:drawablePadding="8dp"
             android:hint="Tìm kiếm sản phẩm"
             android:inputType="text"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:paddingEnd="8dp"
+            android:id="@android:id/edit" /> <!-- Thêm ID để truy cập trong Java -->
     </androidx.cardview.widget.CardView>
 
     <!-- Banner -->
